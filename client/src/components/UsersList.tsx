@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react"
 import { getUsers, type User } from "../lib/getUsers"
+import { useGlobalContext } from "./AppContext"
 
 const UserList = () => {
+    const {isSubmit, setIsSubmit} = useGlobalContext()
     const [users, setUsers] = useState<User[]>([])
-    useEffect(() => {
         const loadUsers = async () => {
             const data = await getUsers()
-            console.log(data)
             setUsers(data)
         }
-
+    useEffect(() => {
         loadUsers()
-    }, [])
+    }, [isSubmit])
     return (
         <ul style={{color: 'white', width: 'fit-content', margin: '0 auto', marginTop: "30px"}}>
             {users.map(item => (
