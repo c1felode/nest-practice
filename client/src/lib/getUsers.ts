@@ -45,3 +45,17 @@ export async function addUser(name: string, email: string) {
         console.error('Request error', err)
     }
 }
+
+export async function deleteUser(id: number) {
+    try {
+        const res = await fetch(`http://${API_URL}/users/${id}`, {
+            method: 'DELETE'
+        })
+        if (!res.ok) {
+            throw new Error(`HTTP error: ${res.status}`)
+        }
+    }
+    catch (err) {
+        console.error('Error when deleting a user ', err)
+    }
+}
